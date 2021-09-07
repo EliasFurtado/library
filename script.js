@@ -21,6 +21,10 @@ class Library {
         }
     }
 
+    removeBook(title) {
+        this.books = this.books.filter((book) => book.title !== title)
+    }
+
     isInLibrary(newBook){
         return this.books.some((book) => book.title === newBook.title)
     }
@@ -57,16 +61,21 @@ function createBookCard(book) {
     const title = document.createElement('h3')
     const author = document.createElement('h3')
     const pages = document.createElement('h3')
+    const deleteButton = document.createElement('button')
 
     bookCard.classList.add('book-card')
 
     title.textContent = book.title
     author.textContent = book.author
     pages.textContent = book.pages
+    deleteButton.textContent = 'delete'
+
+    deleteButton.onclick = removeBook
 
     bookCard.appendChild(title)
     bookCard.appendChild(author)
     bookCard.appendChild(pages)
+    bookCard.appendChild(deleteButton)
     cardContainer.appendChild(bookCard)
 }
 
@@ -79,4 +88,11 @@ function renderBooks() {
     for (let book of myLibrary.books) {
         createBookCard(book)
     }
+}
+
+function removeBook(e) {
+    const title = e.target.parentNode.firstChild.innerHTML.replaceAll('""')
+
+    myLibrary.removeBook(title)
+    renderBooks()
 }
