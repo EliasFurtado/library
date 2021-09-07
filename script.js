@@ -40,14 +40,43 @@ function saveBook() {
     const newBook = getDataFromInput()
 
     if (myLibrary.isInLibrary(newBook)) {
+        //todo error msg
         console.log('ERROR')
     } else {
         myLibrary.addBook(newBook)
+        renderBooks()
         console.log(myLibrary.books)
     }
 }
 
 const button = document.querySelector("#add-button").addEventListener("click", saveBook)
+const cardContainer = document.querySelector(".book-card-container")
 
+function createBookCard(book) {
+    const bookCard = document.createElement('div')
+    const title = document.createElement('h3')
+    const author = document.createElement('h3')
+    const pages = document.createElement('h3')
 
-console.log(myLibrary.books)
+    bookCard.classList.add('book-card')
+
+    title.textContent = book.title
+    author.textContent = book.author
+    pages.textContent = book.pages
+
+    bookCard.appendChild(title)
+    bookCard.appendChild(author)
+    bookCard.appendChild(pages)
+    cardContainer.appendChild(bookCard)
+}
+
+function resetBooksCard() {
+    cardContainer.innerHTML = ''
+}
+
+function renderBooks() {
+    resetBooksCard()
+    for (let book of myLibrary.books) {
+        createBookCard(book)
+    }
+}
