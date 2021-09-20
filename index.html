@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles.css">
     <title>Library APP</title>
 </head>
@@ -21,7 +22,10 @@
                 <label for="pages">Pages</label><br>
                 <input type="text" id="pages" name="pages"><br>
                 <label for="is-read">Have you read it?</label><br>
-          <input class="checkbox" type="checkbox" id="isRead" /><br>
+                <label class="switch">
+                    <input type="checkbox" id="is-read">
+                    <span class="slider round"></span>
+                </label><br>
                 <input type="button" id="add-button" value="add">
             </form>
         </div>

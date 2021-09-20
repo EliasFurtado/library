@@ -1,13 +1,16 @@
-
 class Book {
     constructor(
         title = '',
         author = '',
-        pages = 0
+        pages = 0,
+        stars = 0,
+        isRead = false
     ){
     this.title = title
     this.author = author
-    this.pages = pages}
+    this.pages = pages
+    this.stars = stars
+    this.isRead = isRead}
 }
 
 class Library {
@@ -36,8 +39,9 @@ function getDataFromInput() {
     const title = document.querySelector("#title").value
     const author = document.querySelector("#author").value
     const pages = document.querySelector("#pages").value
+    const isRead = document.querySelector("#isRead").checked
 
-    return new Book(title, author, pages)
+    return new Book(title, author, pages, isRead)
 }
 
 function saveBook() {
