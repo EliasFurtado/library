@@ -3,11 +3,13 @@ class Book {
         title = '',
         author = '',
         pages = 0,
+        readStatus = "Not Read",
         isRead = false
     ){
     this.title = title
     this.author = author
     this.pages = pages
+    this.readStatus = readStatus
     this.isRead = isRead}
 }
 
@@ -29,6 +31,15 @@ class Library {
     isInLibrary(newBook){
         return this.books.some((book) => book.title === newBook.title)
     }
+
+    setStatus(title, status) {
+        return this.books.map((book) => {
+            if(book.title === title) {
+                book.readStatus = status;
+                (status === "Read") ? book.isRead = true : book.isRead = false 
+        }
+    })
+    }
 }
 
 const myLibrary = new Library()
@@ -38,8 +49,25 @@ function getDataFromInput() {
     const author = document.querySelector("#author").value
     const pages = document.querySelector("#pages").value
     const isRead = document.querySelector("#is-read").checked
+    const readStatus = isRead ? "Read" : "Not Read"
 
-    return new Book(title, author, pages, isRead)
+    return new Book(title, author, pages, readStatus, isRead)
+}
+
+const button = document.querySelector("#add-button").addEventListener("click", saveBook)
+const cardContainer = document.querySelector(".book-card-container")
+const newBookButton = document.querySelector(".new-book-btn")
+const newBookForm = document.querySelector(".container")
+const closeFormButton = document.querySelector(".close")
+
+newBookButton.addEventListener("click", () => {
+    newBookForm.style.display = "flex"
+})
+
+closeFormButton.addEventListener("click", closeNewBookForm)
+
+function closeNewBookForm() {
+    newBookForm.style.display = "none"
 }
 
 function saveBook() {
@@ -51,18 +79,16 @@ function saveBook() {
     } else {
         myLibrary.addBook(newBook)
         renderBooks()
-        console.log(myLibrary.books)
+        closeNewBookForm()
     }
 }
-
-const button = document.querySelector("#add-button").addEventListener("click", saveBook)
-const cardContainer = document.querySelector(".book-card-container")
 
 function createBookCard(book) {
     const bookCard = document.createElement('div')
     const title = document.createElement('h3')
-    const author = document.createElement('h3')
-    const pages = document.createElement('h3')
+    const author = document.createElement('p')
+    const pages = document.createElement('p')
+    const readStatus = document.createElement('p')
     const readStatusLabel = document.createElement('label')
     const readStatusInput = document.createElement('input')
     const readStatusSlider = document.createElement('span')
@@ -71,8 +97,9 @@ function createBookCard(book) {
     bookCard.classList.add('book-card')
 
     title.textContent = book.title
-    author.textContent = book.author
-    pages.textContent = book.pages
+    author.textContent = "Author: " + book.author
+    pages.textContent = "Pages: " + book.pages
+    readStatus.textContent = book.readStatus
     readStatusInput.checked = book.isRead
     deleteButton.textContent = 'delete'
 
@@ -81,13 +108,13 @@ function createBookCard(book) {
     readStatusLabel.classList.add('switch')
     readStatusSlider.classList.add('slider', 'round')
 
-    
-
+    readStatusInput.addEventListener("click", setReadStatus)
     deleteButton.onclick = removeBook
 
     bookCard.appendChild(title)
     bookCard.appendChild(author)
     bookCard.appendChild(pages)
+    bookCard.appendChild(readStatus)
     bookCard.appendChild(readStatusLabel)
     bookCard.appendChild(deleteButton)
     readStatusLabel.appendChild(readStatusInput)
@@ -111,4 +138,22 @@ function removeBook(e) {
 
     myLibrary.removeBook(title)
     renderBooks()
+}
+
+function setReadStatus(e) {
+    const title = e.target.parentNode.parentElement.childNodes[0].textContent
+    let toogleStatus = e.target.checked
+    
+    if(toogleStatus) {
+        myLibrary.setStatus(title, "Read")
+        console.log(toogleStatus)
+        renderBooks()
+        
+    } else if(!toogleStatus){
+        myLibrary.setStatus(title, "Not read")
+        console.log(toogleStatus)
+        renderBooks()
+ 
+    }
+    
 }

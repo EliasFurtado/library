@@ -1,16 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+.logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    background-color: rgb(70, 70, 75);
+    border-bottom: 1px solid black;
+}
+
+.logo h3 {
+    margin: 1em;
+    margin-left: 2em;
+    border-bottom: 1px solid white;
+}
+
+.new-book-btn {
+    height: 2em;
+    line-height: 2em;
+    padding: 0 1em 0 1em;
+    margin-right: 2em;
+    color: white;
+    background-color: rgb(3, 177, 3);
+    border: 1px solid;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.new-book-btn:hover {
+    background-color: rgb(3, 200, 3);
 }
 
 .container {
+    display: none;
+    position: fixed;
     width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    animation: showform 1s;
+    z-index: 2;
 }
 
-.nav-bar {
-    display: flex;
+.close {
+    position: absolute;
+    top: .5em;
+    right: 1em;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: .5s;
+    color: white;
+}
+
+.close:hover {
+    color: silver;
+}
+
+.book-form {
+    width: min-content;
+    display: center;
     flex-direction: column;
+    justify-content: center;
+    color: white;
+}
+
+@keyframes showform {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+#add-button {
+    width: 50%;
+    height: 2em;
+    font-size: 1em;
+    color: white;
+    border: 1px solid white;
+    background-color: rgb(3, 177, 3);
+    border-radius: 17px;
+    transition: .5s;
+}
+
+#add-button:hover {
+    background-color: rgb(3, 200, 3);
 }
 
 .switch {
@@ -69,9 +148,26 @@ input:checked +
     border-radius: 50%;
 }
 
+.book-card-container {
+    position: fixed;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(31, 31, 32);
+}
+
 .book-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     text-align: center;
     width: 200px;
     height: 200px;
-    border: 2px solid black;
+    padding: 10px 0 0 10px;
+    margin: 10px;
+    color: white;
+    border-radius: 10px;
+    background-color: rgb(40, 40, 43);
+    
 }

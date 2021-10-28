@@ -10,10 +10,14 @@
 </head>
 <body>
     <header>
-        <h1>Library</h1>
+        <nav class="logo">
+            <h3>MyLibrary</h3>
+            <input class="new-book-btn" type="button" value="New Book">
+        </nav>
     </header>
     <div class="container">
-        <div class="side-bar">
+        <span class="close">✖</span>
+        <div class="book-form">
             <form action="">
                 <label for="title">Title</label><br>
                 <input type="text" id="title" name="title"><br>
@@ -26,12 +30,11 @@
                     <input type="checkbox" id="is-read">
                     <span class="slider round"></span>
                 </label><br>
-                <input type="button" id="add-button" value="add">
+                <input type="button" id="add-button" value="✔">
             </form>
         </div>
-        <div class="book-card-container">
-            
-        </div>
+    </div>
+    <div class="book-card-container">
     </div>
     <script src="./script.js"></script>
 </body>
